@@ -7,39 +7,34 @@
 
 <body>
     <h2>Painter entry Surya Mohan Jagani</h2>
+    <h2>Getting input</h2>
 
     <form>
-        <label for="form1_password">The hidden Painter name :</label>
-        <input type="password" id="form1_password" name="form1_password" value="Monet"> <br>
+        <label for="form1_age">What is your age </label>
+        <input type="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
 
-        <label for="form1_guess">Guess the painter </label>
-        <input type="text" id="form1_guess" name="form1_guess" autofocus> <br>
+        <label for="form1_nick">What is your nickname </label>
+        <input type="text" id="form1_nick" name="form1_nick" autofocus> <br>
 
-        <input type="button" onclick="checkPainter()" value="Check the guess">
+        <input type="button" onclick="resolveForm()" value="Get values from form">
     </form>
 
-    <p id="result">The result will display below</p>
+
+    <p id="result">This text will be replaced </p>
 
     <script>
-        good = 0
-        oops = 0
 
-        function checkPainter() {
+        function resolveForm() {
             console.log("Getting form values")
-            password = document.getElementById("form1_password").value
-            guess = document.getElementById("form1_guess").value
-            output = document.getElementById("result")
+            age = document.getElementById("form1_age").value
+            nick = document.getElementById("form1_nick").value
+            confirmed = confirm("Are these the values? " + age + " and " + nick)
 
-            if (password == guess) {
-                alert("You got it right");
-                good++;
-                output.innerHTML = " Correct answer count: " + good + " Wrong answer count: " + oops;
-
+            out = document.getElementById("result")
+            if (confirmed) {
+                out.innerHTML = "Values were confirmed"
             } else {
-                alert("Sorry")
-                oops++
-                output.innerHTML = "Correct answer count: " + good + " Wrong answer count: " + oops;
-
+                out.innerHTML = "Values were not confirmed"
             }
         }
     </script>
