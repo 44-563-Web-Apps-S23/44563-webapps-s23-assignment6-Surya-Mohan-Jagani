@@ -8,33 +8,69 @@
 <body>
     <h2>Painter entry Surya Mohan Jagani</h2>
     <h2>Getting input</h2>
-
     <form>
-        <label for="form1_age">What is your age </label>
-        <input type="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
+        <label for="form1_pw">The hidden Painter name :</label>
+        <input type="password" id="form1_pw" name="form1_pw" value="Monet"> <br>
 
-        <label for="form1_nick">What is your nickname </label>
-        <input type="text" id="form1_nick" name="form1_nick" autofocus> <br>
+        <label for="form1_guesspainter">Guess the painter </label>
+        <input type="text" id="form1_guesspainter" name="form1_guesspainter" autofocus> <br>
 
-        <input type="button" onclick="resolveForm()" value="Get values from form">
+        <input type="button" onclick="checkPainter()" value="Check the guess">
     </form>
 
+    <p id="result">The guess count will be displayed here</p>
 
-    <p id="result">This text will be replaced </p>
 
     <script>
 
-        function resolveForm() {
+        good = 0
+        oops = 0
+        count = 0;
+        function checkPainter() {
             console.log("Getting form values")
-            age = document.getElementById("form1_age").value
-            nick = document.getElementById("form1_nick").value
-            confirmed = confirm("Are these the values? " + age + " and " + nick)
+            password = document.getElementById("form1_pw").value
+            guess = document.getElementById("form1_guesspainter").value
 
-            out = document.getElementById("result")
-            if (confirmed) {
-                out.innerHTML = "Values were confirmed"
+            result = document.getElementById("result")
+            if (password == guess) {
+                good++;
+                alert("You got it right");
+                result.innerHTML = " Correct answer guess count: " + good + " Wrong answer guess count: " + oops;
             } else {
-                out.innerHTML = "Values were not confirmed"
+                oops++
+                alert("Sorry");
+                result.innerHTML = "Correct answer guess count: " + good + " Wrong answer guess count: " + oops;
+                count=count+1;
+            }
+            if(count > 10)
+            {
+                alert("sorry, guess limit reached");
+                document.getElementById('togglee').style.visibility = 'hidden';
+            }
+        }
+    </script>
+
+    <div class="container">
+        <img id="picture" src="Naked Lady.jpg" height="100" weight="100" onclick="selectImage()">
+    </div>
+    <script>
+        var imageCounter = 1
+        var img = document.getElementById("picture")
+        function selectImage() {
+            switch (imageCounter) {
+                case 1:
+                    img.src = "Jasmine.jpg"
+                    imageCounter++
+                    break
+                case 2:
+                    img.src = "Iris cristata.jpg"
+                    imageCounter++
+                    break
+                case 3:
+                    img.src = "Naked Lady.jpg"
+                    imageCounter = 1
+                    break
+                default:
             }
         }
     </script>
